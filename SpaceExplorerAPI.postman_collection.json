@@ -1,0 +1,856 @@
+{
+  "info": {
+    "name": "SpaceExplorer API",
+    "description": "Collection Postman pour tester tous les endpoints de SpaceExplorer API (Auth, User, Planet, Mission, Satellite, Observation, AI). Utilisez la variable {{base_url}} pour l’URL racine et {{jwt_token}} pour le token JWT.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "d4aebf79-1234-5678-abcd-0f1e2d3c4b5a"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "jwt_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "description": "Endpoints pour l’inscription et la connexion (aucun JWT requis).",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"alice\",\n  \"email\": \"alice@example.com\",\n  \"password\": \"SecurePass123\",\n  \"roles\": [\"ADMIN\"]\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"alice\",\n  \"password\": \"SecurePass123\"\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "description": "CRUD sur les utilisateurs (JWT requis).",
+      "item": [
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"bob\",\n  \"email\": \"bob@example.com\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Martin\",\n  \"password\": \"BobPass123\",\n  \"roles\": [\"ADMIN\"]\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users",
+                "2"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"bob\",\n  \"email\": \"bob.updated@example.com\",\n  \"firstName\": \"Bobby\",\n  \"lastName\": \"Martin\",\n  \"password\": \"UpdatedPass456\",\n  \"roles\": [\"ADMIN\"]\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Planet",
+      "description": "CRUD sur les planètes (JWT requis).",
+      "item": [
+        {
+          "name": "Get Planet by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/planets/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "planets",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Planets",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/planets",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "planets"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Planet",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/planets",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "planets"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mars\",\n  \"type\": \"Terrestre\",\n  \"description\": \"Planète rouge du système solaire\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Planet",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/planets/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "planets",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mars\",\n  \"type\": \"Terrestre\",\n  \"description\": \"Planète rouge - mise à jour description\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Planet",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/planets/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "planets",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Mission",
+      "description": "CRUD sur les missions spatiales (JWT requis).",
+      "item": [
+        {
+          "name": "Get Mission by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/missions/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "missions",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Missions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/missions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "missions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Mission",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/missions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "missions"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mars Expedition\",\n  \"launchDate\": \"2025-09-01\",\n  \"description\": \"Mission robotique vers Mars\",\n  \"pilotUsername\": \"alice\",\n  \"planetIds\": [1]\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Mission",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/missions/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "missions",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mars Expedition Updated\",\n  \"launchDate\": \"2025-09-15\",\n  \"description\": \"Mission robotique vers Mars - mise à jour\",\n  \"pilotUsername\": \"alice\",\n  \"planetIds\": [1]\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Mission",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/missions/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "missions",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Satellite",
+      "description": "CRUD sur les satellites (JWT requis).",
+      "item": [
+        {
+          "name": "Get Satellite by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/satellites/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "satellites",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Satellites",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/satellites",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "satellites"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Satellite",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/satellites",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "satellites"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Europa\",\n  \"type\": \"Naturel\",\n  \"planetId\": 1\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Satellite",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/satellites/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "satellites",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Europa Updated\",\n  \"type\": \"Naturel\",\n  \"planetId\": 1\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Satellite",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/satellites/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "satellites",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Observation",
+      "description": "CRUD sur les observations (JWT requis).",
+      "item": [
+        {
+          "name": "Get Observation by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/observations/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "observations",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Observations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/observations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "observations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Observation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/observations",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "observations"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"Image\",\n  \"result\": \"http://exemple.com/jupiter.jpg\",\n  \"observerUsername\": \"alice\",\n  \"planetId\": 1\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Observation",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/observations/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "observations",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"Spectre\",\n  \"result\": \"Spectre modifié\",\n  \"observerUsername\": \"alice\",\n  \"planetId\": 1\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Observation",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/observations/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "observations",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "AI Services",
+      "description": "Endpoints IA (JWT requis).",
+      "item": [
+        {
+          "name": "Mission Suggestion from AI",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ai/mission-suggestions",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ai",
+                "mission-suggestions"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetPlanet\": \"Mars\",\n  \"missionType\": \"exploration\",\n  \"durationDays\": 30,\n  \"objectives\": \"Étudier la composition du sol, rechercher de la vie microbienne\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Observation Tips from AI",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ai/observation-tips",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ai",
+                "observation-tips"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"target\": \"Jupiter\",\n  \"instrument\": \"télescope optique 200mm\",\n  \"observationDate\": \"2025-08-10\",\n  \"location\": \"Désert d'Atacama, Chili\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Chat with AI",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "text/plain"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ai/chat",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ai",
+                "chat"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "Quel est le meilleur itinéraire pour envoyer une sonde vers Europe (satellite de Jupiter) ?"
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
