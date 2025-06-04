@@ -1,9 +1,9 @@
 spring:
   application:
-    name: parkourapi
+    name: spaceapi
   datasource:
     # The jdbc url is: jdbc:h2:mem:schoolapidb
-    url: jdbc:h2:mem:parkourapidb;DB_CLOSE_DELAY=-1 # for In-memory database and jdbc:h2:file:[path/database-name] for disk-based database.
+    url: jdbc:h2:mem:spaceapi;DB_CLOSE_DELAY=-1 # for In-memory database and jdbc:h2:file:[path/database-name] for disk-based database.
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -21,12 +21,12 @@ spring:
       enabled: true # The console url is: /h2-console
   ai:
     mistralai:
-      api-key: YOUR_MISTRAL_API_KEY
+      api-key: Vr8GvfuIJZYn80Ie6JhS0j0cpRSsLjW7
       chat:
         options:
           model: mistral-small-latest
 jwt:
-  secret: YOUR_SECURE_JWT_SECRET
+  secret: "Kj83HwPQ9sZ2vL0fT5gR7nBcD4LmY8Qx"
   expiration: 3600000 # 1 hour
 springdoc:
   api-docs:
